@@ -2,8 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './Home';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom'
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+ReactDOM.render(
+    <BrowserRouter>
+        <Home />
+    </BrowserRouter>
+
+    , document.getElementById('root'));
+serviceWorker.unregister();
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

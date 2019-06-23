@@ -1,7 +1,16 @@
 import React, {Component} from 'react';
 import logo from './resources/logo.png'
-import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
+import './Home.css'
+import {Navbar, Nav} from 'react-bootstrap'
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import Home from "./Admin/adminHome";
+import Admin from "./Admin/admin/adminViewCreate";
+import Course from "./Admin/course/courseViewCreate";
+import Instructors from "./Admin/instructors/instractorViewCreate";
+import Notices from "./Admin/notices/noticeViewCreate";
+import Students from "./Admin/students/studentsViewCreate";
+
+
 
 class Navigator extends Component{
     render(){
@@ -15,46 +24,33 @@ class Navigator extends Component{
 }
 
 class NavigatorBar extends Component {
-    handleSelect(eventKey) {
-        alert(`selected ${eventKey}`);
-    }
+
     render(){
         return(
-            <div className="header">
-                <img src={logo}/>
+            <Router>
+                <div>
+                    <Navbar bg="warning" variant="dark" className="nav">
+                        <Nav className="mr-auto">
+                            <a className="navbar-brand" href="https://www.sliit.lk/" >
+                                <img src={logo} width="30" height="30"/>
+                            </a>
+                            <Link to="/"  className="navbar-brand" >Home</Link>
+                            <Link to="/course"  className="navbar-brand" >Admin</Link>
+                            <Link to="/subject"  className="navbar-brand" >Courses</Link>
+                            <Link to="/"  className="navbar-brand" >Instructors</Link>
+                            <Link to="/course"  className="navbar-brand" >Notices</Link>
+                            <Link to="/subject"  className="navbar-brand" >Students</Link>
+                        </Nav>
+                    </Navbar>
+                </div>
 
-                <Nav variant="pills" onSelect={k => this.handleSelect(k)}>
-                    <Nav.Item>
-                        <Nav.Link eventKey="1" href="#/home">
-                            Home
-                        </Nav.Link>
-                    </Nav.Item>
-                    <NavDropdown title="Courses" id="nav-dropdown">
-                        <NavDropdown.Item eventKey="4.1">BSc(Hons) in Information Technology - SE</NavDropdown.Item>
-                        <NavDropdown.Item eventKey="4.2">BSc(Hons) in Information Technology - IT</NavDropdown.Item>
-                        <NavDropdown.Item eventKey="4.3">
-                            BSc(Hons) in Information Technology - ISE
-                        </NavDropdown.Item>
-                    </NavDropdown>
-                    <NavDropdown title="Modules" id="nav-dropdown">
-                        <NavDropdown.Item eventKey="4.1">Introduction to Computing System</NavDropdown.Item>
-                        <NavDropdown.Item eventKey="4.2">Application Frameworks</NavDropdown.Item>
-                        <NavDropdown.Item eventKey="4.3">
-                            Software Architecture
-                        </NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Item>
-                        <Nav.Link eventKey="1" href="#/home">
-                            Notices
-                        </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="1" href="#/home">
-                            About
-                        </Nav.Link>
-                    </Nav.Item>
-                </Nav>
-            </div>
+                <Route exact path="/" component={Home} />
+                <Route path="/admin" component={Admin} />
+                <Route path="/course" component={Course} />
+                <Route path="/instructors" component={Instructors} />
+                <Route path="/notices" component={Notices} />
+                <Route path="/students" component={Students} />
+            </Router>
 
 
         )
